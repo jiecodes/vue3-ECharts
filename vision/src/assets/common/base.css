@@ -1,0 +1,104 @@
+/* 导入同目录下的第三方样式 */
+@import "./normalize.css";      
+
+/*:root -> 获取根元素html    这个伪类用于定义变量 使用:var(--line-height)*/
+:root {
+  --color-text: #666;
+  --color-high-text: #ff5777;
+  --color-tint: #ff8198;
+  --color-background: #fff;
+  --font-size: 14px;
+  --line-height: 1.5;
+}
+
+/* @media screen and (max-width: 1200px){
+  html {
+    background-color: red;
+    font-size: 35px;
+  }
+}
+@media screen and (max-width: 1000px){
+  html {
+    background-color: blue;
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 700px){
+  html {
+    background-color: green;
+    font-size: 15px;
+  }
+} */
+
+html {
+  --color: #ff0000;
+}
+
+/* 使登录页面可以添加整屏背景色  */
+html, body, #app {
+  height: 100%;
+  /* min-width: 1366px; */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* 把所有标签内外边距清零 */
+* {
+  margin: 0;
+  padding: 0;
+  /* css3盒子模型     内外边距 宽高 都往里挤 不会撑大盒子 */
+  box-sizing: border-box;
+}
+/* em 和 i 倾斜的文字不倾斜 */
+em , i {
+  font-style: normal;
+}
+/* 去掉li前面的小圆点 */
+li {
+  list-style: none;
+}
+img {
+  /* 照顾低版本浏览器 如果图片外面包含链接会有边框问题 */
+  border: 0;
+  /* 取消图片底部有空白问题 */
+  vertical-align: middle;
+}
+button {
+  /* 鼠标经过button按钮 变成小手手 */
+  cursor: pointer;
+}
+a {
+  color: #666;
+  /* 取消a下面的横线 */
+  text-decoration: none;
+}
+a:hover {
+  color: #c81623;
+}
+/* "\5B8B\4F53" 宋体的意思   浏览器兼容性更好 */
+button,input{font-family:Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,"\5B8B\4F53",sans-serif}
+.hide, .none {
+  /* 定位隐藏对象 不占有原来位置 */
+  display: none;
+} 
+/* 清除浮动 */
+.clearfix:after {
+  visibility: hidden;
+  clear: both;
+  display: block;
+  content: ".";
+  height: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+
+
+
+
+
+

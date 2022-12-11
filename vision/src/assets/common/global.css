@@ -1,0 +1,40 @@
+/* 本项目  整体的 有些样式在局部设置不起作用 */
+
+
+/* 占满全屏 */
+html, body, #app {
+  width: 100%;
+  height: 100%;
+}
+/* sellerPage.vue  */
+.comPage {
+  width: 100%;
+  height: 100%;
+}
+.sellerPage {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* seller.vue */
+.comContainer {
+  width: 100%;
+  height: 100%;
+}
+.comChart {
+  width: 100%;
+  height: 100%;
+}
+.seller {
+  width: 100%;
+  height: 100%;
+}
+
+/* echarts图表圆角 */
+canvas {
+  border-radius: 4%;
+}
+
+
+ 

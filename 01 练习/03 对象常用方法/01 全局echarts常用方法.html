@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 1 第三方导入 ECharts.js 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- 导入 官网下载的自定义主题 -->
+  <!-- <script src="./theme 下载的自定义主题/shine.js"></script> -->
+</head>
+<body>
+  echarts全局对象
+    init            得到一个echarts实例对象
+    registerTheme   注册主题时使用
+    registerMap     注册地图
+    connect         将俩个图关联起来
+
+
+  
+  echartsInstance 对象 使用的方法
+    setOption (新数据会合并(整合)旧数据)
+      设置或修改图表实例的配置项以及数据
+      多次调用setOption方法(合并新的配置和旧的配置)
+    resize (页面自适应)
+      重新计算和绘制图表
+    on/off  
+      绑定或解绑事件处理函数
+        鼠标事件: click dblclick mousedown mouseup   mousemove mouseout
+    dispatchAction
+      触发某些行为
+    clear     清空
+    dispose   销毁实例 销毁后无法再次被使用
+
+
+    
+
+    饼图 on/off
+    <div id="main" style="width: 600px; height: 400px;"></div>
+    <button class="btn1">按钮</button>
+    <button class="btnClear">清空</button>
+    <button class="btnSetOption">setOption重新设置</button>
+    <button class="btnDispose">销毁</button>
+    <script>
+      // 3 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'),);
+     // 4 指定图表的配置项和数据
+     option = {
+      title: {
+        text: 'Referer of a Website',
+        subtext: 'Fake Data',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { value: 1048, name: 'Search Engine' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+     // 5 使用刚指定的配置项和数据显示图表。
+     myChart.setOption(option);
+
+
+
+     
+
+    //  on/off
+    // 对事件进行监听
+    //  myChart.on('click', (arg) => {
+    //    console.log(arg)   // 用于判断点击了哪个
+    //  })
+    //  // 解绑click事件
+    //  myChart.off('click')
+
+    //  dispatchAction        触发某些行为
+    // myChart.dispatchAction({
+    //   type: 'highlight',   // 事件类型
+    //   seriesIndex: 0,      // 图表索引
+    //   dataIndex: 1,        // 图表高亮
+    // })
+    var btn = document.querySelector('.btn1')
+    btn.onclick = () => {
+      myChart.dispatchAction({
+        type: 'highlight',   // 事件类型 高亮
+        seriesIndex: 0,      // 图表索引
+        dataIndex: 1,        // 图表高亮
+      })
+    }
+
+
+    // clear  清空
+    var btnClear = document.querySelector('.btnClear')
+    btnClear.onclick = () => {
+      myChart.clear()
+      console.log('清空图表')
+    }
+
+    // setOption  重新设置图表
+    var btnSetOption = document.querySelector('.btnSetOption')
+    btnSetOption.onclick = () => {
+      myChart.setOption(option)
+      console.log('重新设置图表 显示')
+    }
+
+    // dispose   销毁
+    var btnDispose = document.querySelector('.btnDispose')
+    btnDispose.onclick = () => {
+      myChart.dispose()
+      console.log('销毁 图表')
+    }
+
+
+
+
+    </script>
+  
+  
+
+
+
+
+</body>
+</html>

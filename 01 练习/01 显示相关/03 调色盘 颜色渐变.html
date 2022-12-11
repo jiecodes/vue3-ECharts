@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 1 第三方导入 ECharts.js 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- 导入 官网下载的自定义主题 -->
+  <script src="./theme 下载的自定义主题/shine.js"></script>
+</head>
+<body>
+  调色盘 全局调色盘 color: []        会覆盖主题调色盘
+  局部调色盘  option->series->color 会覆盖全局调色盘
+
+   <!-- 2 为 ECharts 准备一个定义了宽高的 DOM -->
+   <!-- <div id="main" style="width: 600px;height:400px;"></div>
+   <script type="text/javascript">
+    // 3 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'),'shine');
+    // 4 指定图表的配置项和数据
+    option = {
+      color: ['red', 'blue', 'green', 'hotpink', 'skyblue', 'purple'],
+      title: {
+        text: 'Referer of a Website',
+        subtext: 'Fake Data',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { value: 1048, name: '第一  ' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          },
+          color: ['purple', 'red', 'blue', 'green', 'hotpink']
+        }
+      ]
+    };
+    // 5 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option); -->
+
+
+
+    颜色渐变
+      线性渐变/径向渐变  series->itemStyle->color  相对位置 x y
+   <div id="main" style="width: 600px;height:400px;"></div>
+   <script type="text/javascript">
+    // 3 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'),'shine');
+    // 4 指定图表的配置项和数据
+    option = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar',
+          showBackground: true,
+          backgroundStyle: {
+            color: 'rgba(180, 180, 180, 0.2)'
+          },
+          itemStyle: {
+            // color: {
+            //   type: 'linear',     // 线性渐变
+            //   x: 0,
+            //   y: 0,
+            //   x2: 0,
+            //   y2: 1,
+            //   // 配置颜色
+            //   colorStops: [
+            //     {
+            //       offset: 0,
+            //       color: 'red'  // 0%处颜色为红色
+            //     },
+            //     {
+            //       offset: 1,
+            //       color: 'skyblue'  // 100%处颜色为天空蓝
+            //     }
+            //   ]
+            // }
+
+            color: {
+              type: 'radial',       // 径向渐变
+              // 圆心点 和 半径的相对位置      x 0.5 y 0.5 在图形的正中央
+              x: 0.5,
+              y: 0.5,
+              r: 0.5,
+              // 配置颜色
+              colorStops: [
+                {
+                  offset: 0,
+                  color: 'red'  // 0%处颜色为红色
+                },
+                {
+                  offset: 1,
+                  color: 'skyblue'  // 100%处颜色为天空蓝
+                }
+              ]
+            }
+          }
+        }
+      ]
+    };
+    // 5 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+
+  </script>
+</body>
+</html>

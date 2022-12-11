@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+   <!-- 1 第三方导入 ECharts.js 库 -->
+   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+   <!-- 导入 官网下载的自定义主题 -->
+   <script src="./theme 下载的自定义主题/shine.js"></script>
+</head>
+<body>
+  开启动画  animation: true 默认开启
+  动画时长  animationDuration: 5000
+  缓动动画  animationEasing: 'linear' 均匀的
+  动画阈值  animationThreshold: 10,    超过柱状图的个数时 不显示动画
+
+
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <script type="text/javascript">
+    // 3 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'),'shine');
+    // 4 指定图表的配置项和数据
+    option = {
+      animation: true,
+      animationDuration: 4000,
+      animationEasing: 'bounceOut',
+      animationThreshold: 10,
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(180, 180, 180, 0.2)'
+        },
+        markLine: {
+          data: [
+            {
+              name: '平均线',
+              // 支持 'average', 'min', 'max'
+              type: 'average'
+            },
+          ]
+        },
+      },
+    ]
+  };
+    // 5 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+
+
+  </script>
+
+
+</body>
+</html>

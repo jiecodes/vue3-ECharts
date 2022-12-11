@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  koa_server 后端项目  (应用了 node下的  koa2后端)
+    1 在 koa_server 目录下 
+    2 安装依赖包           npm install 
+    3 运行 app.js         node app.js(没提示就是运行起来了)
+
+  vision 前端项目 
+    1 在 vision 目录下 
+    2 安装依赖包      npm install 
+    3 运行           npm run serve
+
+
+
+
+
+  1 后端项目准备 koa_server
+  2 单独组件开发
+  项目流程: trend.vue
+    1 基础代码搭建    Trend 通用代码和流程.vue
+    2 请求数据 getData()
+      获取数据里面的 月  
+        展示其中 commodity map seller里面数据 中的一种
+        对数据进行处理 stack堆叠 legend图例文字
+    3 ui  
+      坐标轴位置 grid
+      工具提示(移动鼠标展示提示) tooltip
+      图例组件      legend
+      填充颜色  areaStyle  进行颜色渐变
+    4 图表标题切换
+      字体图标导入 
+        引入文件(font)  
+        导入文件 import 'demo.css'(trend.vue main.js)
+        使用  <div class="iconfont">&#xe65c;</div>
+      改变类型数据     this.trendData[this.showType]
+    5 分辨率适配
+      获取div的宽度 
+        设置标题文字大小 计算属性 titleStyle      
+        图例大小 option里设置    marginStyle 计算属性添加marginleft
+
+  maps.vue
+    1 地图数据  请求本地中国地图数据 axios.get('')   注册中国地图 registerMap geo: { type: 'map',
+    2 散点图  获取数据 处理数据 图表设置  series
+    3 ui  主题 init第二个参数   标题 title   地图位置和颜色 geo.itemStyle  图例的位置和方向 legend  涟漪效果 rippleEffect  
+    4 分辨率  标题文字大小 图例大小
+    5 地图点击  监听点击事件 initChart()  获取所点击省份的矢量地图信息  显示省份 回到中国地图
+      
+  Rank.vue    
+    1 通用代码和流程
+    2 图表基本功能实现   获取数据   数据处理    图表设置
+    3 ui(initOption)   主题使用  标题设置 title    坐标轴大小和位置 grid(位置)    工具提示 tooltip   颜色设置 series itemStyle(不同数值显示不同颜色)  颜色渐变 new
+    4 平移动画   数据处理 区域缩放 dataZoom    开启定时器 setInterval 获取数据之后 鼠标移出图表mouseover     销毁定时器clearInterval  组件销毁 鼠标移入图表mouseout      
+    5 分辨率适配 标题文字   柱的宽度 barWidth   柱的圆角 borderRadius
+
+  Hot.vue  三级分类(先将一个分类展示 通过左右箭头形式进行切换)
+    1 通用代码
+    2 图表基本功能实现(一个类别的饼图)   获取数据   数据处理    图表设置 series
+    3 切换数据的实现 把hotData中的一级分类动态获取(设置一个变量 currentIndex=0) 点击左右箭头改变currentIndex的值,调用更新数据方法  this.hotData[0]第一个分类数据
+    4 ui  主题使用 chalk    标题设置 title   高亮状态显示文字 emphasis(高亮状态下)    图例的形状和位置  工具提示 tooltip formatter(饼图每一项展示的内容)
+    5 分辨率适配   图例组件 legend      标题 title     饼图大小 series radius      箭头和一级分类 标签使用 用计算属性
+  
+  Stock.vue 
+    1 通用代码
+    2 图表基本功能实现(一个类别的饼图)   获取数据   数据处理 五个饼图 每一个饼图俩个区域(每个区域都设置value值)    图表设置 series pie 修改位置center 圆环设置半径 radius
+    3 ui  主题使用 chalk    标题设置 title   鼠标移入图标取消动画 hoverAnimation  指示线移除 labelLine   圆环内文字显示   颜色设置 每一个圆环颜色不同,渐变色
+    4 切换动画 定时器  this.chartInstance.on('mouseout', () =>{})
+    5 分辨率适配  标题文字大小 圆环半径 圆环文字      div宽度 this.$refs.stockRef.offsetWidth
+
+  3 webSocket的引入 (数据来源:前端向后端发起http请求获取到的 缺点:一旦数据发生变化,不能及时更新前端数据 解决:webSocket 改变交互,由webSocket造成数据的链接)
+    webSocket 基本使用
+      后端 (koa_server 文件名)
+        安装包 npm i ws -S
+        创建对象  const wss = new WebSocket.Server
+        监听事件  
+          链接数据  wss.on('connection', client => {console.log('客户端连接成功')})
+          接收数据事件 
+        发送数据  client.send('hello')
+      前端 (websocket_demo.html)
+        webSocket是window对象提供的,不需要安装包
+        创建对象 const wss = new WebSocket('ws://localhost:9998')
+        监听事件 
+          连接成功事件  ws.onopen
+          接收数据事件  ws.onmessage
+          关闭连接事件  ws.onclose
+        发送数据  ws.send
+    使用webSocket改造项目
+      后端 
+        创建web_socket_service.js
+          创建Socket服务端对象,绑定端口 port 
+          监听事件 connection(客户端连接成功) message(客户端发送数据给服务端,并且接收成功了)
+          将监听的代码发到一个函数中 并且把这个函数导出
+        服务端接收数据字段
+        服务端发送数据字段
+      前端  
+        创建 socket_service.js
+        组件改造
+        优化 
+  4 细节
+    组件合并  ScreenPage.vue  把每一个组件作为子组件<trend></trend> 放到一个页面中
+    全屏切换  给需要全屏的组件添加样式(定位 宽高100% 最高级 .fullscreen) 展开按钮每一个子组件盖住其他页面
+      布局和样式
+      全屏状态下的 数据和样式 定义
+      全屏图标
+      点击事件
+      联动效果(一个客户端发生改变 其他客户端页跟着改变)
+        将数据发送给服务端
+    主题切换 (切换 chalk vintage主题)
+      数据存储 vuex
+      点击切换按钮 切换主题颜色  this.$store.commit('changeTheme') 调用vuex中的方法
+      各个组件监听theme的变化 xuex中的state         Seller.vue
+      特殊处理 
+        html元素样式改变
+          ScreenPage.vue 背景色 标题颜色 左上角的logo图标 顶部边框图片 右上角切换按钮
+          Trend.vue 下拉框背景 下拉框文字颜色
+          Hot.vue 箭头颜色 分类名称的颜色
+        theme_utils.js  定义俩个主题下切换的样式数据 使用属性绑定控制样式
+
+
+
+
+
+
+</body>
+</html>

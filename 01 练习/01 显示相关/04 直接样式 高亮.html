@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 1 第三方导入 ECharts.js 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- 导入 官网下载的自定义主题 -->
+  <script src="./theme 下载的自定义主题/shine.js"></script>
+</head>
+<body>
+  局部样式覆盖全局样式
+  直接样式   option->series->data->itemStyle(控制这一区域样式)
+            title(文字)->textStyle
+            折线 雷达
+              lineStyle areaStyle 
+            label  文字颜色  option-series->data->label
+  高亮      itemStyle textStyle lineStyle areaStyle label   外面包裹 emphasis
+            option-series->data->emphasis->itemStyle
+
+
+
+   <div id="main" style="width: 600px;height:400px;"></div>
+   <script type="text/javascript">
+    // 3 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'),'shine');
+    // 4 指定图表的配置项和数据
+    option = {
+      title: {
+        text: 'Referer of a Website',
+        subtext: 'Fake Data',
+        left: 'center',
+        textStyle: { color: 'purple'}
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { value: 1048, name: '修改的', itemStyle: {color: 'hotpink'}, label: {color: 'purple'}, emphasis: {itemStyle: {color: 'skyblue'}, label: {color: 'red'}},},
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+    // 5 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+   <!-- 1 第三方导入 ECharts.js 库 -->
+   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+   <!-- 导入 官网下载的自定义主题 -->
+   <script src="./theme 下载的自定义主题/shine.js"></script>
+   <!-- 导入 500人的身高体重 -->
+   <script src="./data 500人的身高体重/test_data.json"></script>
+</head>
+<body>
+  增量动画的实现 myChart.setOption    增加的元素与旧元素是整合关系
+
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <button class="animation">增量动画</button>
+  <button class="add">增加元素</button>
+  <script type="text/javascript">
+    // 3 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'),'shine');
+    // 4 指定图表的配置项和数据
+    option = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(180, 180, 180, 0.2)'
+        }
+      }
+    ]
+  };
+    // 5 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    var btn = document.querySelector('.animation')
+    btn.onclick = function() {
+      option = {
+        series: [
+          {
+            data: [50, 100, 90, 180, 170, 200, 13],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+              color: 'rgba(180, 180, 180, 0.2)'
+            }
+          }
+        ]
+      };
+      myChart.setOption(option)
+    }
+
+    var btnAdd = document.querySelector('.add')
+    // btnAdd.onclick = () => {
+    btnAdd.onclick = function() {
+      xDataArr.push('mon1')
+      yDataArr.push(100)
+      var option = {
+        xAxis: {
+          data: xDataArr
+        },
+        series: [
+          {
+            data: yDataArr,
+          }
+        ]
+      };
+      myChart.setOption(option);
+    }
+
+
+  </script>
+
+
+</body>
+</html>

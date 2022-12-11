@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+后台项目  (学习koa   study_koa2文件)   在study_koa2文件下
+  检查node版本        node -v
+  安装Koa             npm init -y(创建 package.json文件 维护三方包)
+                      npm install koa(下载 koa到本地)
+  创建 app.js文件(入口文件)                          
+    1 创建koa对象
+    2 编写响应函数(中间件)
+    3 监听端口
+  启动服务器          node app.js          执行node app.js后   执行127.0.0.1:3000刷新看 vscode终端
+
+
+项目准备 后台  koa_server    
+  1 安装包  npm init -y     
+           npm install koa
+  2 创建文件和目录结构
+    app.js          入口文件
+    data/           文件数据 一般放到数据库里面
+      1.商家销量/api/seller
+      2.预算开销/api/budget
+      3.库存信息/api/stock
+      4.销量趋势/api/trend
+      5.销量排行/api/rank
+      6.商家分布/api/map
+      7.热销商品/api/hotproduct
+    middleware/     中间层(中间件)
+      koa_response_data.js       处理业务逻辑的中间件
+      koa_response_duration.js   服务器总耗时的中间件
+      koa_response_header.js     设置响应头的中间件
+    utils           工具
+      file_utils.js              读取某个路径下的文件内容
+
+
+  vision_old  前端项目 拷贝源码
+
+
+  
+
+  
+
+
+    
+</body>
+</html>
